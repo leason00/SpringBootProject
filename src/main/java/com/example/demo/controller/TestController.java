@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.TestBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,13 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/index")
 public class TestController {
+    @Value("${com.test.test}")
+    private String x;
+
     @RequestMapping("/test")
     public String index(){
-        return "test";
+        return x;
     }
 
     @RequestMapping("/hello/{name}")
-	public String fuck(@PathVariable String name) {
-		return "fuck " + name;
+	public TestBean fuck(@PathVariable String name) {
+		return new TestBean("hello", name);
 	}
 }
